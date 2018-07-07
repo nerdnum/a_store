@@ -74,7 +74,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(APPS_DIR('templates')), str(APPS_DIR('accounts','templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django_settings_export.settings_export',
             ],
         },
     },
@@ -163,6 +164,17 @@ AUTHENTICATION_BACKENDS = {
     'django.contrib.auth.backends.ModelBackend',
 }
 
-EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+ACCOUNT_ACTIVATION_DAYS = 2
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+# LOGIN_REDIRECT_URL = 'login_success'
+LOGOUT_REDIRECT_URL = 'login'
+
+HTTP_PREFIX = 'http';
+
+SETTINGS_EXPORT = [
+    'HTTP_PREFIX',
+]

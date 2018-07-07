@@ -1,1 +1,8 @@
 {%  extends 'store/base.html' %}
+
+{% block content %}
+    <form method="post" action="{{ url 'registration_activation_complete' }}">
+        <p>Please activate your account by pressing the button below.</p>
+        <input type="submit" value="Activate">
+    </form>
+{% endblock %}

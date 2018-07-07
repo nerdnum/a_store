@@ -3,6 +3,8 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 
+from django.core.mail import send_mail
+
 from django.db import models
 
 class UserManager(BaseUserManager):
@@ -54,3 +56,9 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+    def get_short_name(self):
+        return self.username
+
+    def email_user(self, subject, message, from_email=None):
+        send_mail(subject, message, from_email, [self.email, ])

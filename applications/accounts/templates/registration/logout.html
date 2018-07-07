@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{%  extends 'store/base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <p>{{ user.username }} still present</p>
+    {% else %}
+        <p>Logged Out!</p>
+        <a href="{%  url 'login' %}">Login</a>
+    {% endif %}
+{% endblock %}
