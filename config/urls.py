@@ -19,4 +19,5 @@ from django.conf.urls import url, include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('applications.accounts.urls')),
+    url(r'^api/', include('applications.api.urls')),
 ]

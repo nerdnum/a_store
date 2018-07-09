@@ -3,11 +3,17 @@ from django.contrib.auth.models import (
     BaseUserManager,
 )
 
-from django.core.mail import send_mail
+from django.conf import settings
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from rest_framework.authtoken.models import Token
 
+from django.core.mail import send_mail
 from django.db import models
 
+
 class UserManager(BaseUserManager):
+
     def create_user(self, email, username=None, password=None):
         if not email:
             raise ValueError('A user must have an email address.')
@@ -19,8 +25,9 @@ class UserManager(BaseUserManager):
             raise ValueError('Please provide a password.')
 
         user = self.model(
-            email = self.normalize_email(email),
-            username = username
+            email=self.normalize_email(email),
+            username=username
+
         )
 
         user.set_password(password)
@@ -41,6 +48,7 @@ class User(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     objects = UserManager()
 
@@ -62,3 +70,8 @@ class User(AbstractBaseUser):
 
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email, ])
+
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        Token.objects.create(user=instance)
