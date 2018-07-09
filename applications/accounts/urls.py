@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.conf.urls import  url
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetConfirmView, \

@@ -34,9 +34,6 @@ if READ_DOT_ENV_FILE:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DJANGO_DEBUG', False)
 
-
-
-
 # Application definition
 
 DJANGO_APPS = (
@@ -55,7 +52,8 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'applications.api',
-    'applications.accounts'
+    'applications.accounts',
+    'applications.products_framework',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -90,17 +88,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': str(ROOT_DIR.path('db.sqlite3')),
-    }
-}
 
 
 # Password validation

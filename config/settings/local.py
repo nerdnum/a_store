@@ -5,3 +5,14 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='yop7dn&n0mu$esd8s^t3$@fstk#7dxj@%
 
 
 DEBUG = env.bool('DJANGO_DEBUG', default=True)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'a_store',
+        'USER': 'a_store',
+        'PASSWORD': '!alpha#1',
+        'HOST': '127.0.0.1',
+        'PORT': 5432
+    }
+}
